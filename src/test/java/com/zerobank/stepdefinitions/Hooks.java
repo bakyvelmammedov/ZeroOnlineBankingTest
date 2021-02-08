@@ -14,7 +14,7 @@ public class Hooks {
     @Before
     public void setUp(){
         System.out.println("\tthis is coming from BEFORE");
-        BrowserUtils.waitFor(3);
+        //BrowserUtils.waitFor(3);
 
     }
 
@@ -25,7 +25,7 @@ public class Hooks {
             scenario.attach(screenshot, "image/png","screenshot");
 
         }
-        Driver.closeDriver();
+       // Driver.closeDriver();
 
     }
 }
