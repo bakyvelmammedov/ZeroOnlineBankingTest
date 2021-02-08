@@ -25,6 +25,9 @@ public class LoginPage {
     @FindBy(name = "submit")
     public WebElement loginBtn;
 
+    @FindBy(xpath = "//div[@class='alert alert-error']")
+    public WebElement errorMessage;
+
 
     public void login(String username,String password){
         singInBtn.click();

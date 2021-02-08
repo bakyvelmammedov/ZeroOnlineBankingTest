@@ -1,13 +1,10 @@
 package com.zerobank.stepdefinitions;
 
 import com.zerobank.pages.LoginPage;
-import com.zerobank.utilities.BrowserUtils;
 import com.zerobank.utilities.ConfigurationReader;
 import com.zerobank.utilities.Driver;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.WebDriver;
 
 public class LoginStepDefs {
 
@@ -47,6 +44,7 @@ public class LoginStepDefs {
         String userPassword = ConfigurationReader.get("password");
 
         new LoginPage().login(userName, userPassword);
+        //Driver.get().switchTo().alert().accept();
 
     }
 
@@ -56,5 +54,30 @@ public class LoginStepDefs {
         String actualTitle = Driver.get().getTitle();
         Assert.assertEquals("Zero - Account Summary",actualTitle);
     }
+
+    @When("the user enters the blank username or password")
+    public void the_user_enters_the_black_username_or_password_and_clicks() {
+        String userName = ConfigurationReader.get("blank_username");
+        String userPassword = ConfigurationReader.get("blank_password");
+
+        new LoginPage().login(userName, userPassword);
+
+    }
+
+    @Then("the user should be able to see {string} message.")
+    public void the_user_should_be_able_to_see_message(String errorMessage) {
+        String actualString = new LoginPage().errorMessage.getText();
+        Assert.assertEquals(errorMessage,actualString);
+
+    }
+
+    @When("the user enters the wrong username or password")
+    public void the_user_enters_the_wrong_username_or_password_and_clicks() {
+        String userName = ConfigurationReader.get("wrong_username");
+        String userPassword = ConfigurationReader.get("wrong_password");
+
+        new LoginPage().login(userName, userPassword);
+    }
+
 
 }
